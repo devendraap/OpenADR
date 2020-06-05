@@ -83,57 +83,56 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/").permitAll();
-// 		DigestAuthenticationEntryPoint authenticationEntryPoint = new DigestAuthenticationEntryPoint();
-// 		authenticationEntryPoint.setKey(DigestAuthenticationProvider.DIGEST_KEY);
-// 		authenticationEntryPoint.setRealmName(digestAuthenticationProvider.getRealm());
+		DigestAuthenticationEntryPoint authenticationEntryPoint = new DigestAuthenticationEntryPoint();
+		authenticationEntryPoint.setKey(DigestAuthenticationProvider.DIGEST_KEY);
+		authenticationEntryPoint.setRealmName(digestAuthenticationProvider.getRealm());
 
-// 		DigestAuthenticationFilter digestAuthenticationFilter = new DigestAuthenticationFilter();
-// 		digestAuthenticationFilter.setAuthenticationEntryPoint(authenticationEntryPoint);
-// 		digestAuthenticationFilter.setUserDetailsService(digestUserDetailsService);
-// 		digestAuthenticationFilter.setPasswordAlreadyEncoded(true);
+		DigestAuthenticationFilter digestAuthenticationFilter = new DigestAuthenticationFilter();
+		digestAuthenticationFilter.setAuthenticationEntryPoint(authenticationEntryPoint);
+		digestAuthenticationFilter.setUserDetailsService(digestUserDetailsService);
+		digestAuthenticationFilter.setPasswordAlreadyEncoded(true);
 
-// 		BasicAuthenticationEntryPoint basicAuthenticationEntryPoint = new BasicAuthenticationEntryPoint();
-// 		basicAuthenticationEntryPoint.setRealmName(BasicAuthenticationManager.BASIC_REALM);
+		BasicAuthenticationEntryPoint basicAuthenticationEntryPoint = new BasicAuthenticationEntryPoint();
+		basicAuthenticationEntryPoint.setRealmName(BasicAuthenticationManager.BASIC_REALM);
 
-// 		BasicAuthenticationFilter basicAuthenticationFilter = new BasicAuthenticationFilter(basicAuthenticationManager);
+		BasicAuthenticationFilter basicAuthenticationFilter = new BasicAuthenticationFilter(basicAuthenticationManager);
 
-// 		http.cors().and().csrf().disable();
+		http.cors().and().csrf().disable();
 
-// 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-// 		http.authorizeRequests().regexMatchers(HttpMethod.OPTIONS, ".*").permitAll();
+		http.authorizeRequests().regexMatchers(HttpMethod.OPTIONS, ".*").permitAll();
 
-// 		http.authorizeRequests().regexMatchers(HttpMethod.POST, ".*/auth/.*").permitAll();
+		http.authorizeRequests().regexMatchers(HttpMethod.POST, ".*/auth/.*").permitAll();
 
-//		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
+		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
 
-//		http.authorizeRequests().anyRequest().authenticated().and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
-//				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
+		http.authorizeRequests().anyRequest().authenticated().and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
+				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
 
-//		http.addFilter(digestAuthenticationFilter).authorizeRequests().anyRequest().authenticated().and()
-//				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
+		http.addFilter(digestAuthenticationFilter).authorizeRequests().anyRequest().authenticated().and()
+				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
 
-// 		http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
+		http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
 
-// 			@Override
-// 			public void commence(HttpServletRequest arg0, HttpServletResponse arg1, AuthenticationException arg2)
-// 					throws IOException, ServletException {
-// 				if (arg0.getServletPath().contains("/Ven") || arg0.getServletPath().contains("swagger")
-// 						|| arg0.getServletPath().contains("swagger-resources") || arg0.getServletPath().contains("v2")
-// 						|| arg0.getServletPath().contains("swagger-ui")) {
-//					LOGGER.error(arg0.getServletPath(), arg2);
-//					arg1.setStatus(HttpStatus.UNAUTHORIZED_401);
+			@Override
+			public void commence(HttpServletRequest arg0, HttpServletResponse arg1, AuthenticationException arg2)
+					throws IOException, ServletException {
+				if (arg0.getServletPath().contains("/Ven") || arg0.getServletPath().contains("swagger")
+						|| arg0.getServletPath().contains("swagger-resources") || arg0.getServletPath().contains("v2")
+						|| arg0.getServletPath().contains("swagger-ui")) {
+					LOGGER.error(arg0.getServletPath(), arg2);
+					arg1.setStatus(HttpStatus.UNAUTHORIZED_401);
 //					arg1.addHeader("WWW-Authenticate", "Basic");
-// 				} else {
-// 					LOGGER.error(arg0.getServletPath(), arg2);
-// 					arg1.setStatus(HttpStatus.FORBIDDEN_403);
+				} else {
+					LOGGER.error(arg0.getServletPath(), arg2);
+					arg1.setStatus(HttpStatus.FORBIDDEN_403);
 
-// 				}
+				}
 
-// 			}
+			}
 
-// 		});
+		});
 
 	}
 
