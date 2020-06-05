@@ -121,8 +121,8 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 				if (arg0.getServletPath().contains("/Ven") || arg0.getServletPath().contains("swagger")
 						|| arg0.getServletPath().contains("swagger-resources") || arg0.getServletPath().contains("v2")
 						|| arg0.getServletPath().contains("swagger-ui")) {
-					LOGGER.error(arg0.getServletPath(), arg2);
-					arg1.setStatus(HttpStatus.UNAUTHORIZED_401);
+//					LOGGER.error(arg0.getServletPath(), arg2);
+//					arg1.setStatus(HttpStatus.UNAUTHORIZED_401);
 //					arg1.addHeader("WWW-Authenticate", "Basic");
 				} else {
 					LOGGER.error(arg0.getServletPath(), arg2);
