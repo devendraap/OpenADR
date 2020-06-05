@@ -10,6 +10,6 @@ curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get -y install openjdk-8-jdk
 sudo apt-get -y install maven 
 
-mvn clean package install -P swagger,external,frontend -DskipTests=true
+mvn clean package install -P external,frontend -DskipTests=true
 
 ansible-playbook ./provisioning/playbook.yml
