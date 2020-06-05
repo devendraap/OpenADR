@@ -12,4 +12,4 @@ sudo apt-get -y install maven
 
 mvn clean package install -P external,frontend -DskipTests=true
 
-ansible-playbook ./provisioning/playbook.yml
+ansible-playbook ./devops/vtn20b_postgres/provisioning/playbook.yml
