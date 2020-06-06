@@ -83,6 +83,8 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
+
 //		DigestAuthenticationEntryPoint authenticationEntryPoint = new DigestAuthenticationEntryPoint();
 //		authenticationEntryPoint.setKey(DigestAuthenticationProvider.DIGEST_KEY);
 //		authenticationEntryPoint.setRealmName(digestAuthenticationProvider.getRealm());
@@ -106,9 +108,11 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().regexMatchers(HttpMethod.POST, ".*/auth/.*").permitAll();
 
 		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
+		http.authorizeRequests().anyRequest().permitAll();
 
-		http.authorizeRequests().anyRequest().authenticated().and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
-				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
+		http.authorizeRequests().anyRequest().authenticated();
+//				.and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
+//				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
 
 		http.authorizeRequests().anyRequest().authenticated().and()
 				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
