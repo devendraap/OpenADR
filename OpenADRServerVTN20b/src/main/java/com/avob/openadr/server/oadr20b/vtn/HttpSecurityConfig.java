@@ -83,19 +83,28 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+
+		LOGGER.warn(" === DigestAuthenticationEntryPoint === ");
 		DigestAuthenticationEntryPoint authenticationEntryPoint = new DigestAuthenticationEntryPoint();
 		authenticationEntryPoint.setKey(DigestAuthenticationProvider.DIGEST_KEY);
 		authenticationEntryPoint.setRealmName(digestAuthenticationProvider.getRealm());
+		LOGGER.warn(" === DigestAuthenticationEntryPoint: Done === ");
 
+
+		LOGGER.warn(" === DigestAuthenticationFilter === ");
 		DigestAuthenticationFilter digestAuthenticationFilter = new DigestAuthenticationFilter();
 		digestAuthenticationFilter.setAuthenticationEntryPoint(authenticationEntryPoint);
 		digestAuthenticationFilter.setUserDetailsService(digestUserDetailsService);
 		digestAuthenticationFilter.setPasswordAlreadyEncoded(true);
+		LOGGER.warn(" === DigestAuthenticationFilter: Done === ");
 
+		LOGGER.warn(" === BasicAuthenticationEntryPoint === ");
 		BasicAuthenticationEntryPoint basicAuthenticationEntryPoint = new BasicAuthenticationEntryPoint();
 		basicAuthenticationEntryPoint.setRealmName(BasicAuthenticationManager.BASIC_REALM);
 
 		BasicAuthenticationFilter basicAuthenticationFilter = new BasicAuthenticationFilter(basicAuthenticationManager);
+
+		LOGGER.warn(" === BasicAuthenticationEntryPoint: Done === ");
 
 		http.cors().and().csrf().disable();
 
@@ -107,11 +116,16 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
 //		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
 
+		LOGGER.warn(" === oadr20bX509AuthenticatedUserDetailsService === ");
 		http.authorizeRequests().anyRequest().authenticated().and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
 				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
+		LOGGER.warn(" === oadr20bX509AuthenticatedUserDetailsService: Done === ");
 
+
+		LOGGER.warn(" === digestAuthenticationFilter === ");
 		http.addFilter(digestAuthenticationFilter).authorizeRequests().anyRequest().authenticated().and()
 				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
+		LOGGER.warn(" === digestAuthenticationFilter: Done === ");
 
 		http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
 
