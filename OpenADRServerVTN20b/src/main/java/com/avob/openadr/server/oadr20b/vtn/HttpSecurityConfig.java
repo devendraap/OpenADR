@@ -41,7 +41,7 @@ import com.avob.openadr.server.common.vtn.security.DigestUserDetailsService;
 
 /**
  * Spring security configuration
- * 
+ *
  * @author bertrand
  *
  */
@@ -105,13 +105,13 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().regexMatchers(HttpMethod.POST, ".*/auth/.*").permitAll();
 
-		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
+//		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
 
- 		http.authorizeRequests().anyRequest().authenticated().and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
- 				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
+		http.authorizeRequests().anyRequest().authenticated().and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
+				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
 
- 		http.addFilter(digestAuthenticationFilter).authorizeRequests().anyRequest().authenticated().and()
- 				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
+		http.addFilter(digestAuthenticationFilter).authorizeRequests().anyRequest().authenticated().and()
+				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
 
 		http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
 
@@ -126,8 +126,8 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 					arg1.addHeader("WWW-Authenticate", "Basic");
 				} else {
 					LOGGER.error(arg0.getServletPath(), arg2);
-//					arg1.setStatus(HttpStatus.FORBIDDEN_403);
-					arg1.addHeader("WWW-Authenticate", "Basic");
+					arg1.setStatus(HttpStatus.FORBIDDEN_403);
+
 				}
 
 			}
