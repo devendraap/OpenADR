@@ -60,7 +60,7 @@ public class OadrSecurityRoleService {
 	}
 
 	public User grantX509Role(String username) {
-		return new User(username, "", Lists.newArrayList(new SimpleGrantedAuthority("ROLE_VTN")));
+		return new User("admin.oadr.com", "", Lists.newArrayList(new SimpleGrantedAuthority("ROLE_VTN")));
 //
 //		if (username.equals(vtnConfig.getOadr20bFingerprint())) {
 //			return new User(username, "", Lists.newArrayList(new SimpleGrantedAuthority("ROLE_VTN")));
@@ -69,21 +69,7 @@ public class OadrSecurityRoleService {
 	}
 
 	private AbstractUser saveFindUser(String username) {
-		if (abstractUserDao.findOneByUsername(username) == null) {
-			class AbstractUserClass extends AbstractUser {
-				public AbstractUserClass(String username) {
-					super.username = username;
-					this.digestPassword = "digestPassword";
-					this.basicPassword = "basicPassword";
-					this.commonName = "commonName";
-					this.authenticationType = "";
-					this.roles = Arrays.asList(VTNRoleEnum.ROLE_ADMIN.name());
-				}
-			}
-			abstractUserDao.save(new AbstractUserClass(username));
-		}
-
-
+		username = "admin.oadr.com";
 		AbstractUser abstractUser = abstractUserDao.findOneByUsername(username);
 		if (abstractUser == null) {
 			throw new UsernameNotFoundException("");
