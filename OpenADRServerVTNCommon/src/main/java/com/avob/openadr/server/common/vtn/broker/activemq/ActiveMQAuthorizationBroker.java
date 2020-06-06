@@ -52,7 +52,8 @@ public class ActiveMQAuthorizationBroker extends BrokerFilter {
 					User grantX509Role = oadrSecurityRoleService.grantX509Role(fingerprint);
 					for (GrantedAuthority grantedAuthority : grantX509Role.getAuthorities()) {
 						if (grantedAuthority.getAuthority().equals("ROLE_VTN")
-								|| grantedAuthority.getAuthority().equals("ROLE_APP")) {
+								|| grantedAuthority.getAuthority().equals("ROLE_APP")
+								|| grantedAuthority.getAuthority().equals("ROLE_ANONYMOUS")) {
 
 							SecurityContext subject = new SecurityContext(fingerprint) {
 
