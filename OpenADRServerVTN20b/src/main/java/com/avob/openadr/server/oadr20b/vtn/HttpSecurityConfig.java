@@ -83,14 +83,14 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		DigestAuthenticationEntryPoint authenticationEntryPoint = new DigestAuthenticationEntryPoint();
-		authenticationEntryPoint.setKey(DigestAuthenticationProvider.DIGEST_KEY);
-		authenticationEntryPoint.setRealmName(digestAuthenticationProvider.getRealm());
+//		DigestAuthenticationEntryPoint authenticationEntryPoint = new DigestAuthenticationEntryPoint();
+//		authenticationEntryPoint.setKey(DigestAuthenticationProvider.DIGEST_KEY);
+//		authenticationEntryPoint.setRealmName(digestAuthenticationProvider.getRealm());
 
-		DigestAuthenticationFilter digestAuthenticationFilter = new DigestAuthenticationFilter();
-		digestAuthenticationFilter.setAuthenticationEntryPoint(authenticationEntryPoint);
-		digestAuthenticationFilter.setUserDetailsService(digestUserDetailsService);
-		digestAuthenticationFilter.setPasswordAlreadyEncoded(true);
+//		DigestAuthenticationFilter digestAuthenticationFilter = new DigestAuthenticationFilter();
+//		digestAuthenticationFilter.setAuthenticationEntryPoint(authenticationEntryPoint);
+//		digestAuthenticationFilter.setUserDetailsService(digestUserDetailsService);
+//		digestAuthenticationFilter.setPasswordAlreadyEncoded(true);
 
 		BasicAuthenticationEntryPoint basicAuthenticationEntryPoint = new BasicAuthenticationEntryPoint();
 		basicAuthenticationEntryPoint.setRealmName(BasicAuthenticationManager.BASIC_REALM);
@@ -105,12 +105,12 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().regexMatchers(HttpMethod.POST, ".*/auth/.*").permitAll();
 
-//		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
+		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
 
 		http.authorizeRequests().anyRequest().authenticated().and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
 				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
 
-		http.addFilter(digestAuthenticationFilter).authorizeRequests().anyRequest().authenticated().and()
+		http.authorizeRequests().anyRequest().authenticated().and()
 				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
 
 		http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
@@ -122,8 +122,8 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 						|| arg0.getServletPath().contains("swagger-resources") || arg0.getServletPath().contains("v2")
 						|| arg0.getServletPath().contains("swagger-ui")) {
 					LOGGER.error(arg0.getServletPath(), arg2);
-					arg1.setStatus(HttpStatus.UNAUTHORIZED_401);
-//					arg1.addHeader("WWW-Authenticate", "Basic");
+//					arg1.setStatus(HttpStatus.UNAUTHORIZED_401);
+					arg1.addHeader("WWW-Authenticate", "Basic");
 				} else {
 					LOGGER.error(arg0.getServletPath(), arg2);
 					arg1.setStatus(HttpStatus.FORBIDDEN_403);
