@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -27,6 +29,7 @@ import com.google.common.collect.Lists;
  */
 @Service
 public class OadrSecurityRoleService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(Oadr20bX509AuthenticatedUserDetailsService.class);
 
 	@Resource
 	private VtnConfig vtnConfig;
@@ -67,6 +70,9 @@ public class OadrSecurityRoleService {
 	}
 
 	private AbstractUser saveFindUser(String username) {
+		if (abstractUserDao.findOneByUsername(username) == null)
+			abstractUserDao.save(new AbstractUser(username));
+
 		AbstractUser abstractUser = abstractUserDao.findOneByUsername(username);
 		if (abstractUser == null) {
 			throw new UsernameNotFoundException("");

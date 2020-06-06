@@ -1,6 +1,7 @@
 package com.avob.openadr.server.common.vtn.models.user;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,13 +15,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.avob.openadr.server.common.vtn.VTNRoleEnum;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "abstract_user")
-public abstract class AbstractUser implements Serializable {
+public class AbstractUser implements Serializable {
 
 	/**
 	 * 
@@ -57,7 +59,13 @@ public abstract class AbstractUser implements Serializable {
 		this.roles = roles;
 	}
 
-	public AbstractUser() {
+	public AbstractUser(String username) {
+		this.username = username;
+		this.digestPassword = "digestPassword";
+		this.basicPassword = "basicPassword";
+		this.commonName = "commonName";
+		this.authenticationType = "";
+		this.roles = Arrays.asList(VTNRoleEnum.ROLE_ADMIN.name());
 	}
 
 	public Long getId() {
