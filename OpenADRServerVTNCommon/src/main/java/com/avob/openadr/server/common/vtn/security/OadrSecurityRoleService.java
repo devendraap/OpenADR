@@ -1,9 +1,12 @@
 package com.avob.openadr.server.common.vtn.security;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.annotation.Resource;
 
+import com.avob.openadr.server.common.vtn.VTNRoleEnum;
+import com.avob.openadr.server.common.vtn.models.user.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,10 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.avob.openadr.server.common.vtn.VtnConfig;
-import com.avob.openadr.server.common.vtn.models.user.AbstractUser;
-import com.avob.openadr.server.common.vtn.models.user.AbstractUserDao;
-import com.avob.openadr.server.common.vtn.models.user.OadrApp;
-import com.avob.openadr.server.common.vtn.models.user.OadrUser;
 import com.avob.openadr.server.common.vtn.models.ven.Ven;
 import com.google.common.collect.Lists;
 
@@ -29,7 +28,7 @@ import com.google.common.collect.Lists;
  */
 @Service
 public class OadrSecurityRoleService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(Oadr20bX509AuthenticatedUserDetailsService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(OadrSecurityRoleService.class);
 
 	@Resource
 	private VtnConfig vtnConfig;
@@ -70,8 +69,20 @@ public class OadrSecurityRoleService {
 	}
 
 	private AbstractUser saveFindUser(String username) {
-		if (abstractUserDao.findOneByUsername(username) == null)
-			abstractUserDao.save(new AbstractUser(username));
+		if (abstractUserDao.findOneByUsername(username) == null) {
+			class AbstractUserClass extends AbstractUser {
+				public AbstractUserClass(String username) {
+					super.username = username;
+					this.digestPassword = "digestPassword";
+					this.basicPassword = "basicPassword";
+					this.commonName = "commonName";
+					this.authenticationType = "";
+					this.roles = Arrays.asList(VTNRoleEnum.ROLE_ADMIN.name());
+				}
+			}
+			abstractUserDao.save(new AbstractUserClass(username));
+		}
+
 
 		AbstractUser abstractUser = abstractUserDao.findOneByUsername(username);
 		if (abstractUser == null) {

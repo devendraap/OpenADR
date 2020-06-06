@@ -22,34 +22,34 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "abstract_user")
-public class AbstractUser implements Serializable {
+public abstract class AbstractUser implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4987643291191994638L;
+	protected static final long serialVersionUID = -4987643291191994638L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	protected Long id;
 
 	@NotNull
 	@Column(name = "username", unique = true)
-	private String username;
+	protected String username;
 
 	@Column(name = "token_1")
-	private String digestPassword;
+	protected String digestPassword;
 
 	@Column(name = "token_2")
-	private String basicPassword;
+	protected String basicPassword;
 
-	private String commonName;
+	protected String commonName;
 
-	private String authenticationType;
+	protected String authenticationType;
 
 	@ElementCollection
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<String> roles;
+	protected List<String> roles;
 
 	public List<String> getRoles() {
 		return roles;
@@ -59,13 +59,7 @@ public class AbstractUser implements Serializable {
 		this.roles = roles;
 	}
 
-	public AbstractUser(String username) {
-		this.username = username;
-		this.digestPassword = "digestPassword";
-		this.basicPassword = "basicPassword";
-		this.commonName = "commonName";
-		this.authenticationType = "";
-		this.roles = Arrays.asList(VTNRoleEnum.ROLE_ADMIN.name());
+	public AbstractUser() {
 	}
 
 	public Long getId() {
