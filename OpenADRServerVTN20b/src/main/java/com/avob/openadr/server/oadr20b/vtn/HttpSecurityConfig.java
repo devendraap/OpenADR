@@ -83,16 +83,14 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		DigestAuthenticationEntryPoint authenticationEntryPoint = new DigestAuthenticationEntryPoint();
+		authenticationEntryPoint.setKey(DigestAuthenticationProvider.DIGEST_KEY);
+		authenticationEntryPoint.setRealmName(digestAuthenticationProvider.getRealm());
 
-
-//		DigestAuthenticationEntryPoint authenticationEntryPoint = new DigestAuthenticationEntryPoint();
-//		authenticationEntryPoint.setKey(DigestAuthenticationProvider.DIGEST_KEY);
-//		authenticationEntryPoint.setRealmName(digestAuthenticationProvider.getRealm());
-
-//		DigestAuthenticationFilter digestAuthenticationFilter = new DigestAuthenticationFilter();
-//		digestAuthenticationFilter.setAuthenticationEntryPoint(authenticationEntryPoint);
-//		digestAuthenticationFilter.setUserDetailsService(digestUserDetailsService);
-//		digestAuthenticationFilter.setPasswordAlreadyEncoded(true);
+		DigestAuthenticationFilter digestAuthenticationFilter = new DigestAuthenticationFilter();
+		digestAuthenticationFilter.setAuthenticationEntryPoint(authenticationEntryPoint);
+		digestAuthenticationFilter.setUserDetailsService(digestUserDetailsService);
+		digestAuthenticationFilter.setPasswordAlreadyEncoded(true);
 
 		BasicAuthenticationEntryPoint basicAuthenticationEntryPoint = new BasicAuthenticationEntryPoint();
 		basicAuthenticationEntryPoint.setRealmName(BasicAuthenticationManager.BASIC_REALM);
@@ -108,14 +106,12 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().regexMatchers(HttpMethod.POST, ".*/auth/.*").permitAll();
 
 		http.authorizeRequests().antMatchers("/testvtn/").permitAll();
-		http.authorizeRequests().anyRequest().permitAll();
 
-		http.authorizeRequests().anyRequest().authenticated();
-//				.and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
-//				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
+ 		http.authorizeRequests().anyRequest().authenticated().and().x509().subjectPrincipalRegex("CN=(.*?)(?:,|$)")
+ 				.authenticationUserDetailsService(oadr20bX509AuthenticatedUserDetailsService);
 
-		http.authorizeRequests().anyRequest().authenticated().and()
-				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
+ 		http.addFilter(digestAuthenticationFilter).authorizeRequests().anyRequest().authenticated().and()
+ 				.addFilter(basicAuthenticationFilter).authorizeRequests().anyRequest().authenticated();
 
 		http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
 
