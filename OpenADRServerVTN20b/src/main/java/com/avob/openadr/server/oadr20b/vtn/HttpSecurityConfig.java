@@ -126,8 +126,8 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 					arg1.addHeader("WWW-Authenticate", "Basic");
 				} else {
 					LOGGER.error(arg0.getServletPath(), arg2);
-					arg1.setStatus(HttpStatus.FORBIDDEN_403);
-
+//					arg1.setStatus(HttpStatus.FORBIDDEN_403);
+					arg1.addHeader("WWW-Authenticate", "Basic");
 				}
 
 			}
