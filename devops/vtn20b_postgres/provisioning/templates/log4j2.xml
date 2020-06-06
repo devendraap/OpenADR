@@ -19,11 +19,11 @@
 			<AppenderRef ref="Console" />
 			<AppenderRef ref="RollingFile" />
 		</Logger>
-		<Logger level="warn" name="org.springframework" additivity="false">
+		<Logger level="debug" name="org.springframework" additivity="false">
 			<AppenderRef ref="Console" />
 			<AppenderRef ref="RollingFile" />
 		</Logger>
-		<Root level="warn">
+		<Root level="debug">
 			<AppenderRef ref="Console" />
 			<AppenderRef ref="RollingFile" />
 		</Root>
