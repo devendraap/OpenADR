@@ -23,7 +23,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 			const hasVenAccess = user && user.roles
 				&& (user.roles.includes("ROLE_DEVICE_MANAGER") || user.roles.includes("ROLE_ADMIN"));
 
-			const hasVtnConfigurationAccess = user && user.roles && user.roles.includes("ROLE_ADMIN"))
+			const hasVtnConfigurationAccess = user && user.roles && user.roles.includes("ROLE_ADMIN");
 
 			const hasAccountAccess = user && user.roles && user.roles.includes("ROLE_ADMIN");
 
