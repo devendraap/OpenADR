@@ -78,7 +78,7 @@ public class RoleControllerTest {
 		oadrAppService.delete(oadrAppService.findAll());
 		String username = "admin";
 		adminUser = oadrUserService.prepare(username);
-		adminUser.setRoles(Lists.newArrayList("ROLE_ADMIN"));
+		adminUser.setRoles(Lists.newArrayList("ROLE_ADMIN", "ROLE_ANONYMOUS"));
 		oadrUserService.save(adminUser);
 
 		username = "app";

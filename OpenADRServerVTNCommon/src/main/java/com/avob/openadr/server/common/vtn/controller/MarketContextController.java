@@ -35,14 +35,14 @@ public class MarketContextController {
 	@Resource
 	private DtoMapper dtoMapper;
 
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEVICE_MANAGER') or hasRole('ROLE_DRPROGRAM')")
+	@PreAuthorize("hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_ADMIN') or hasRole('ROLE_DEVICE_MANAGER') or hasRole('ROLE_DRPROGRAM')")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
 	public List<VenMarketContextDto> listMarketContext() {
 		return dtoMapper.mapList(venMarketContextService.findAll(), VenMarketContextDto.class);
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DRPROGRAM')")
+	@PreAuthorize("hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_ADMIN') or hasRole('ROLE_DRPROGRAM')")
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
 	public VenMarketContextDto createMarketContext(@Valid @RequestBody VenMarketContextDto dto,
@@ -63,7 +63,7 @@ public class MarketContextController {
 		return dtoMapper.map(marketContext, VenMarketContextDto.class);
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DRPROGRAM')")
+	@PreAuthorize("hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_ADMIN') or hasRole('ROLE_DRPROGRAM')")
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
 	@ResponseBody
 	public VenMarketContextDto updateMarketContext(@Valid @RequestBody VenMarketContextDto dto,
@@ -85,7 +85,7 @@ public class MarketContextController {
 		return dtoMapper.map(marketContext, VenMarketContextDto.class);
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEVICE_MANAGER') or hasRole('ROLE_DRPROGRAM')")
+	@PreAuthorize("hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_ADMIN') or hasRole('ROLE_DEVICE_MANAGER') or hasRole('ROLE_DRPROGRAM')")
 	@RequestMapping(value = "/{marketContextName}", method = RequestMethod.GET)
 	@ResponseBody
 	public VenMarketContextDto findMarketContextByName(@PathVariable("marketContextName") String groupName,

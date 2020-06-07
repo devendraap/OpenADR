@@ -451,7 +451,7 @@ public class Oadr20aVTNEiEventControllerTest {
 
 		String username = "user1";
 		OadrUser user = userService.prepare(username);
-		user.setRoles(Arrays.asList("ROLE_ADMIN"));
+		user.setRoles(Arrays.asList("ROLE_ADMIN", "ROLE_ANONYMOUS"));
 		userService.save(user);
 		UserRequestPostProcessor userSecuritySession = SecurityMockMvcRequestPostProcessors.user(username)
 				.roles("ADMIN");
@@ -658,7 +658,7 @@ public class Oadr20aVTNEiEventControllerTest {
 
 		String username = "user1";
 		OadrUser user = userService.prepare(username);
-		user.setRoles(Arrays.asList("ROLE_ADMIN"));
+		user.setRoles(Arrays.asList("ROLE_ADMIN", "ROLE_ANONYMOUS"));
 		userService.save(user);
 		UserRequestPostProcessor userSecuritySession = SecurityMockMvcRequestPostProcessors.user(username)
 				.roles("ADMIN");

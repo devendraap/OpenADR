@@ -40,6 +40,9 @@ var acceptableRoles = [{
   name:"Admin",
   value: "ROLE_ADMIN"
 },{
+    name:"Admin",
+    value: "ROLE_ANONYMOUS"
+},{
   name:"Device Manager",
   value: "ROLE_DEVICE_MANAGER"
 },{
