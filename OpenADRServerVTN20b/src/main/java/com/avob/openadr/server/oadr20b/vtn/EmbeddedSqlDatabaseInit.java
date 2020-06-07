@@ -406,7 +406,7 @@ public class EmbeddedSqlDatabaseInit implements ApplicationListener<ContextRefre
 		dto.setRoles(Arrays.asList(VTNRoleEnum.ROLE_ADMIN.name()));
 		saveUserIfMissing(dto);
 
-		OadrUserCreateDto dto = new OadrUserCreateDto();
+		dto = new OadrUserCreateDto();
 		dto.setAuthenticationType("login");
 		dto.setCommonName("anonymousUser");
 		dto.setUsername("anonymousUser");
