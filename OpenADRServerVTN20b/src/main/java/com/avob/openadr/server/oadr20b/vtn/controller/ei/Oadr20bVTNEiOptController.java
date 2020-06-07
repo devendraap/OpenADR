@@ -21,7 +21,7 @@ public class Oadr20bVTNEiOptController {
 	@Resource
 	private Oadr20bVTNPayloadService oadr20bVTNPayloadService;
 
-	@PreAuthorize("hasRole('ROLE_VEN') or hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_REGISTERED')")
+	@PreAuthorize("hasRole('ROLE_VEN') or hasRole('ROLE_REGISTERED')")
 	@RequestMapping(value = Oadr20bUrlPath.EI_OPT_SERVICE, method = RequestMethod.POST)
 	@ResponseBody
 	public String request(@RequestBody String payload, Principal principal) {

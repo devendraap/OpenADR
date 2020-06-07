@@ -30,7 +30,7 @@ import com.avob.openadr.server.oadr20b.vtn.service.report.SelfReportRequestServi
 @CrossOrigin
 @RestController
 @RequestMapping("/Vtn")
-@PreAuthorize("hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class Oadr20bVtnController {
 
 	@Resource

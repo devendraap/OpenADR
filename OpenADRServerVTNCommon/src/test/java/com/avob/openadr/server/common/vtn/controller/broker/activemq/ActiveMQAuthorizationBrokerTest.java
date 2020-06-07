@@ -185,7 +185,7 @@ public class ActiveMQAuthorizationBrokerTest {
 		X509Certificate cert = OadrPKISecurity.parseCertificate("src/test/resources/cert/test.crt");
 		String fingerprint = OadrFingerprintSecurity.getOadr20bFingerprint(cert);
 		OadrUser prepare = oadrUserService.prepare(fingerprint);
-		prepare.setRoles(Lists.newArrayList("ROLE_VTN", "ROLE_ANONYMOUS"));
+		prepare.setRoles(Lists.newArrayList("ROLE_VTN"));
 		oadrUserService.save(prepare);
 
 		ConnectionContext context = Mockito.mock(ConnectionContext.class, Answers.RETURNS_DEEP_STUBS);

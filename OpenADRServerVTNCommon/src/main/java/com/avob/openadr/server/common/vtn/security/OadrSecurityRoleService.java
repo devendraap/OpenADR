@@ -60,7 +60,7 @@ public class OadrSecurityRoleService {
 	}
 
 	public User grantX509Role(String username) {
-		return new User("admin.oadr.com", "", Lists.newArrayList(new SimpleGrantedAuthority("ROLE_VTN"), new SimpleGrantedAuthority("ROLE_ANONYMOUS")));
+		return new User("admin.oadr.com", "", Lists.newArrayList(new SimpleGrantedAuthority("ROLE_VTN")));
 //
 //		if (username.equals(vtnConfig.getOadr20bFingerprint())) {
 //			return new User(username, "", Lists.newArrayList(new SimpleGrantedAuthority("ROLE_VTN")));

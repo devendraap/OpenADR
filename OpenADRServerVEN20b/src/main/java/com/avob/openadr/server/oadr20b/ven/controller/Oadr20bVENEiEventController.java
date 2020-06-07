@@ -27,7 +27,7 @@ import com.avob.openadr.server.oadr20b.ven.exception.Oadr20bDistributeEventAppli
 import com.avob.openadr.server.oadr20b.ven.service.Oadr20bVENEiEventService;
 
 @ConditionalOnExpression("#{!${oadr.pullModel}}")
-@PreAuthorize("hasRole('ROLE_VTN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_ANONYMOUS')")
+@PreAuthorize("hasRole('ROLE_VTN') or hasRole('ROLE_ADMIN')")
 @Controller
 @RequestMapping(Oadr20bUrlPath.OADR_BASE_PATH)
 public class Oadr20bVENEiEventController {

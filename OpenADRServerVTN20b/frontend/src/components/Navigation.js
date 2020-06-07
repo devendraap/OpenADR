@@ -18,14 +18,14 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
  	render() {
  		var user = this.props.user.user;
 			const hasEventAccess = user && user.roles 
-				&& (user.roles.includes("ROLE_DRPROGRAM") || (user.roles.includes("ROLE_ADMIN")) || user.roles.includes("ROLE_ANONYMOUS"));
+				&& (user.roles.includes("ROLE_DRPROGRAM") || (user.roles.includes("ROLE_ADMIN")));
 
 			const hasVenAccess = user && user.roles
-				&& (user.roles.includes("ROLE_DEVICE_MANAGER") || user.roles.includes("ROLE_ADMIN") || user.roles.includes("ROLE_ANONYMOUS"));
+				&& (user.roles.includes("ROLE_DEVICE_MANAGER") || user.roles.includes("ROLE_ADMIN"));
 
-			const hasVtnConfigurationAccess = user && user.roles && user.roles.includes("ROLE_ADMIN" || user.roles.includes("ROLE_ANONYMOUS"))
+			const hasVtnConfigurationAccess = user && user.roles && user.roles.includes("ROLE_ADMIN"))
 
-			const hasAccountAccess = user && user.roles && user.roles.includes("ROLE_ADMIN" || user.roles.includes("ROLE_ANONYMOUS"));
+			const hasAccountAccess = user && user.roles && user.roles.includes("ROLE_ADMIN");
 
 		  return (
 		 <div>

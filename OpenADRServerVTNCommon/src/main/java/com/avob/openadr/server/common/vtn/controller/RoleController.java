@@ -31,7 +31,7 @@ public class RoleController {
 	@Resource
 	private AbstractUserDao abstractUserDao;
 
-	@PreAuthorize("hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_ADMIN') or hasRole('ROLE_DEVICE_MANAGER') or hasRole('ROLE_DRPROGRAM') or hasRole('ROLE_VTN') or hasRole('ROLE_XMPP')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEVICE_MANAGER') or hasRole('ROLE_DRPROGRAM') or hasRole('ROLE_VTN') or hasRole('ROLE_XMPP')")
 	@RequestMapping(value = "/{username}", method = RequestMethod.POST)
 	@ResponseBody
 	public List<String> getUserRole(@PathVariable("username") String username, HttpServletResponse response) {

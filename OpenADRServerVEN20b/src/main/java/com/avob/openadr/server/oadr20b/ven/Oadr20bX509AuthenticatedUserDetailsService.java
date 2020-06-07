@@ -34,7 +34,7 @@ public class Oadr20bX509AuthenticatedUserDetailsService
 	private static final Logger LOGGER = LoggerFactory.getLogger(Oadr20bX509AuthenticatedUserDetailsService.class);
 
 	private static final List<SimpleGrantedAuthority> VTN_AUTHORITY = Arrays
-			.asList(new SimpleGrantedAuthority("ROLE_VTN"), new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
+			.asList(new SimpleGrantedAuthority("ROLE_VTN"));
 
 	@Resource
 	private MultiVtnConfig multiConfig;
