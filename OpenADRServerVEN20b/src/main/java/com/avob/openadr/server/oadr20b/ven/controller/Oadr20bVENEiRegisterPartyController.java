@@ -23,7 +23,7 @@ import com.avob.openadr.security.exception.OadrSecurityException;
 import com.avob.openadr.server.oadr20b.ven.service.Oadr20bVENEiRegisterPartyService;
 
 @ConditionalOnExpression("#{!${oadr.pullModel}}")
-@PreAuthorize("hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_VTN')")
+@PreAuthorize("hasRole('ROLE_ANONYMOUS') or hasRole('ROLE_VTN') or hasRole('ROLE_ADMIN')")
 @Controller
 @RequestMapping(Oadr20bUrlPath.OADR_BASE_PATH)
 public class Oadr20bVENEiRegisterPartyController {
