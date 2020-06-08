@@ -170,7 +170,7 @@
 									<arguments>run build</arguments>
 									<environmentVariables>
 										<PUBLIC_URL>/testvtn/</PUBLIC_URL>
-										<REACT_APP_BASENAME>/testvtn/</REACT_APP_BASENAME>
+										<REACT_APP_BASENAME>/testvtnui/</REACT_APP_BASENAME>
 									</environmentVariables>
 								</configuration>
 							</execution>
