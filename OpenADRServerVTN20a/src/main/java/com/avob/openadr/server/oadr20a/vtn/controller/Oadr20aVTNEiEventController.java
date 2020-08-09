@@ -38,7 +38,7 @@ public class Oadr20aVTNEiEventController {
 	@Resource
 	private Oadr20aVTNEiEventService oadr20aVtnEiEventService;
 
-	@PreAuthorize("hasRole('ROLE_VEN')")
+	@PreAuthorize("hasRole('ROLE_VEN') or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = Oadr20aUrlPath.EI_EVENT_SERVICE, method = RequestMethod.POST)
 	@ResponseBody
 	public String request(@RequestBody String payload, Principal principal)

@@ -21,7 +21,7 @@ public class Oadr20bVTNOadrPollController {
 	@Resource
 	private Oadr20bVTNPayloadService oadr20bVTNPayloadService;
 
-	@PreAuthorize("hasRole('ROLE_VEN')")
+	@PreAuthorize("hasRole('ROLE_VEN') or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = Oadr20bUrlPath.OADR_POLL_SERVICE, method = RequestMethod.POST)
 	@ResponseBody
 	public String request(@RequestBody String payload, Principal principal) {

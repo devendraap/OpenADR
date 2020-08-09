@@ -21,7 +21,7 @@ public class Oadr20bVTNEiRegisterPartyController {
 	@Resource
 	private Oadr20bVTNPayloadService oadr20bVTNPayloadService;
 
-	@PreAuthorize("hasRole('ROLE_VEN')")
+	@PreAuthorize("hasRole('ROLE_VEN') or hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = Oadr20bUrlPath.EI_REGISTER_PARTY_SERVICE, method = RequestMethod.POST)
 	@ResponseBody
 	public String request(@RequestBody String payload, Principal principal) {
